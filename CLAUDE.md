@@ -25,7 +25,7 @@ Run through this list every time Tzu-Hsun asks to update the website:
 
 - [ ] **Citation stats** — update Citations, h-index, i10-index numbers in index.html
 - [ ] **Citation bar chart** — update bar heights (use Google-scholar-plot skill: height = value / 5 * 80px) and add new year column if needed
-- [ ] **"Last update on..."** date — update the `citation-updated` text in index.html to today's date
+- [ ] **"Last update on..."** date — **always** update the `citation-updated` text in index.html to today's date (format: "Mon D, YYYY", e.g. "Jun 1, 2026"). Do this on every website edit, no exceptions.
 - [ ] **Publications** — check if new papers need to be added to publications.html
 - [ ] **Research** — check if research focus or projects have changed in research.html
 - [ ] **Projects** — check if new projects need to be added to projects.html

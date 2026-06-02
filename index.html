@@ -18,6 +18,7 @@
     <li><a href="research.html">Research</a></li>
     <li><a href="publications.html">Publications</a></li>
     <li><a href="projects.html">Projects</a></li>
+    <li><a href="links.html">Links</a></li>
     <li><a href="about.html">About</a></li>
   </ul>
   <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -94,16 +95,13 @@
             </div>
           </div>
         </a>
-        <p class="citation-updated">Last update on May 19, 2026</p>
-<<<<<<< HEAD
+        <p class="citation-updated">Last update on Jun 1, 2026</p>
         <div class="visitor-counter" id="visitor-counter">
           <span class="visitor-eye">👁</span>
           <span class="visitor-item">Today: <span id="visitor-daily">—</span></span>
           <span class="visitor-sep">·</span>
           <span class="visitor-item">Total: <span id="visitor-total">—</span></span>
         </div>
-=======
->>>>>>> 40779de (Initial website upload)
       </div>
       <!-- Left photo col end -->
 
@@ -133,7 +131,7 @@
               <div class="pub-summary-content">
                 <div class="pub-title">The ionospheric plasma density hole on the 10 May 2024 Mother's Day great magnetic storm</div>
                 <div class="pub-authors">Wu, T. Y., Liu, J. Y., Lin, C. Y., Chao, C. K., <strong>Kao, T. H.</strong>, and Lee, P. H.</div>
-                <div class="pub-venue">Geoscience Letters, 2025 · <a href="https://doi.org/10.1029/2025GL115956" target="_blank" onclick="event.stopPropagation()">doi:10.1029/2025GL115956</a></div>
+                <div class="pub-venue">Geophysical Research Letters, 2025 · <a href="https://doi.org/10.1029/2025GL115956" target="_blank" onclick="event.stopPropagation()">doi:10.1029/2025GL115956</a></div>
               </div>
               <span class="pub-chevron">▸</span>
             </summary>
@@ -180,6 +178,23 @@
       <!-- Right: content -->
     </div>
   </section>
+
+  <!-- ── Photo Slideshow ──────────────────────────────────────── -->
+  <section class="slideshow-section">
+    <span class="section-label">Photos</span>
+    <div class="slideshow-wrapper">
+      <button class="slideshow-btn slideshow-btn-prev" id="slidePrev" aria-label="Previous photo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="slideshow-container">
+        <div class="slideshow-track" id="slideshowTrack"></div>
+      </div>
+      <button class="slideshow-btn slideshow-btn-next" id="slideNext" aria-label="Next photo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+    <div class="slideshow-dots" id="slideshowDots"></div>
+  </section>
 </main>
 
 <footer>
@@ -219,23 +234,23 @@
   }
   loadHomeContent();
 
-<<<<<<< HEAD
   // ── Visitor counter ─────────────────────────────────────────────
   // Uses counterapi.dev (free, no registration) for global tracking.
   // sessionStorage prevents double-counting on page refresh.
   // Daily key resets automatically each UTC day.
   // ──────────────────────────────────────────────────────────────────
   async function trackVisitor() {
-    const ns   = 'tzhsunkao-site';
+    const ns    = 'tzhsunkao-site';
     const today = new Date().toISOString().slice(0, 10); // "YYYY-MM-DD"
     const base  = 'https://api.counterapi.dev/v1';
     const seen  = sessionStorage.getItem('vc');
     try {
       let total, daily;
       if (!seen) {
+        // First visit in this session — increment both counters
         const [tr, dr] = await Promise.all([
-          fetch(`${base}/${ns}/total/hit`),
-          fetch(`${base}/${ns}/daily-${today}/hit`)
+          fetch(`${base}/${ns}/total/up`),
+          fetch(`${base}/${ns}/daily-${today}/up`)
         ]);
         const tj = await tr.json();
         const dj = await dr.json();
@@ -243,6 +258,7 @@
         daily = dj.count;
         sessionStorage.setItem('vc', '1');
       } else {
+        // Already counted — just read current values
         const [tr, dr] = await Promise.all([
           fetch(`${base}/${ns}/total`),
           fetch(`${base}/${ns}/daily-${today}`)
@@ -252,8 +268,8 @@
         total = tj.count;
         daily = dj.count;
       }
-      document.getElementById('visitor-daily').textContent = daily.toLocaleString();
-      document.getElementById('visitor-total').textContent = total.toLocaleString();
+      if (typeof total === 'number') document.getElementById('visitor-total').textContent = total.toLocaleString();
+      if (typeof daily === 'number') document.getElementById('visitor-daily').textContent = daily.toLocaleString();
     } catch {
       const el = document.getElementById('visitor-counter');
       if (el) el.style.display = 'none';
@@ -261,8 +277,69 @@
   }
   trackVisitor();
 
-=======
->>>>>>> 40779de (Initial website upload)
+  // ── Photo Slideshow ─────────────────────────────────────────────
+  (function () {
+    const slides = [
+      { src: 'Resources/Pics/PXL_20230424_091714951.MP.jpg',          caption: 'EGU General Assembly 2023 — Vienna, Apr 2023' },
+      { src: 'Resources/Pics/PXL_20230425_085704063.MP.jpg',          caption: 'Poster presentation at EGU 2023 — Vienna, Apr 2023' },
+      { src: 'Resources/Pics/PXL_20230519_055750252.MP.jpg',          caption: 'IRI Workshop 2023 — Daejeon, May 2023' },
+      { src: 'Resources/Pics/PXL_20230628_154529632.jpg',             caption: 'CEDAR 2023 — San Diego, Jun 2023' },
+      { src: 'Resources/Pics/VideoCapture_20241211-141040.jpg',       caption: 'AGU 2024 Fall Meeting — Washington D.C., Dec 2024' },
+      { src: 'Resources/Pics/20250625_173009.jpg',                    caption: 'CEDAR 2025 — Des Moines, Jun 2025' },
+      { src: 'Resources/Pics/PXL_20251215_163256371.jpg',             caption: 'AGU 2025 Fall Meeting — New Orleans, Dec 2025' },
+      { src: 'Resources/Pics/IMG-20251216-WA0003.jpg',                caption: 'Oral presentation at AGU 2025 — New Orleans, Dec 2025' },
+      { src: 'Resources/Pics/IMG_7060.jpg',                           caption: 'COSMO Launch group gathering — Santa Barbara, Mar 2026' },
+      { src: 'Resources/Pics/Messenger_creation_B5965AB3-75FC-4021-8CFD-F005095620B1.jpeg', caption: 'Space Weather Workshop 2026 — Boulder, Apr 2026' },
+      { src: 'Resources/Pics/PXL_20260430_185235507.jpg',             caption: 'NOAA SWPC Tour (SWW2026) — Boulder, Apr 2026' },
+      { src: 'Resources/Pics/PXL_20260505_153828662.jpg',             caption: 'EGU26 General Assembly — Vienna, May 2026' },
+    ];
+
+    const track = document.getElementById('slideshowTrack');
+    const dotsEl = document.getElementById('slideshowDots');
+    let current = 0;
+    let timer;
+
+    // Build slides and dots
+    slides.forEach((s, i) => {
+      const slide = document.createElement('div');
+      slide.className = 'slide';
+      slide.innerHTML = `<img src="${s.src}" alt="${s.caption}" loading="lazy"><div class="slide-caption">${s.caption}</div>`;
+      track.appendChild(slide);
+
+      const dot = document.createElement('button');
+      dot.className = 'slideshow-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', `Go to photo ${i + 1}`);
+      dot.addEventListener('click', () => goTo(i));
+      dotsEl.appendChild(dot);
+    });
+
+    function goTo(n) {
+      current = (n + slides.length) % slides.length;
+      track.style.transform = `translateX(-${current * 100}%)`;
+      document.querySelectorAll('.slideshow-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === current);
+      });
+    }
+
+    function next() { goTo(current + 1); }
+    function prev() { goTo(current - 1); }
+
+    let isPaused = false;
+
+    document.getElementById('slideNext').addEventListener('click', () => { next(); resetTimer(); });
+    document.getElementById('slidePrev').addEventListener('click', () => { prev(); resetTimer(); });
+
+    function startTimer() { clearInterval(timer); timer = setInterval(next, 4000); }
+    function resetTimer() { if (!isPaused) startTimer(); }
+
+    // Pause on hover
+    const wrapper = track.closest('.slideshow-section');
+    wrapper.addEventListener('mouseenter', () => { isPaused = true;  clearInterval(timer); });
+    wrapper.addEventListener('mouseleave', () => { isPaused = false; startTimer(); });
+
+    startTimer();
+  })();
+
   // Align meta block's left edge with the "T" in the name
   function alignMeta() {
     const name = document.querySelector('.home-name');
